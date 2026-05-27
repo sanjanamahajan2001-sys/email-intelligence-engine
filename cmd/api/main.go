@@ -257,20 +257,28 @@ func handleWebValidate(c *gin.Context) {
 
 	// Map internal EmailResult to WebValidationResponse
 	authenticity := "Invalid"
-	if res.IsValid && res.SMTP {
-		if res.ReputationScore > 60 {
-			authenticity = "Verified"
+	if res.IsValid {
+		if res.SMTP {
+			if res.ReputationScore > 60 {
+				authenticity = "Verified"
+			} else {
+				authenticity = "Suspicious"
+			}
+		} else if res.SMTPBlocked {
+			if res.ReputationScore > 75 {
+				authenticity = "Verified"
+			} else {
+				authenticity = "Suspicious"
+			}
 		} else {
 			authenticity = "Suspicious"
 		}
-	} else if res.IsValid && !res.SMTP {
-		authenticity = "Suspicious" // DNS valid but SMTP failed
 	}
 
 	recommendation := "Reject"
-	if authenticity == "Verified" && !res.Disposable {
+	if authenticity == "Verified" && !res.Disposable && !res.SMTPBlocked {
 		recommendation = "Accept"
-	} else if authenticity == "Suspicious" || res.CatchAll || res.Role {
+	} else if authenticity == "Suspicious" || res.CatchAll || res.Role || res.SMTPBlocked {
 		recommendation = "Flag"
 	}
 
@@ -322,20 +330,28 @@ func handlePublicValidate(c *gin.Context) {
 
 	// Map internal EmailResult to WebValidationResponse
 	authenticity := "Invalid"
-	if res.IsValid && res.SMTP {
-		if res.ReputationScore > 60 {
-			authenticity = "Verified"
+	if res.IsValid {
+		if res.SMTP {
+			if res.ReputationScore > 60 {
+				authenticity = "Verified"
+			} else {
+				authenticity = "Suspicious"
+			}
+		} else if res.SMTPBlocked {
+			if res.ReputationScore > 75 {
+				authenticity = "Verified"
+			} else {
+				authenticity = "Suspicious"
+			}
 		} else {
 			authenticity = "Suspicious"
 		}
-	} else if res.IsValid && !res.SMTP {
-		authenticity = "Suspicious" // DNS valid but SMTP failed
 	}
 
 	recommendation := "Reject"
-	if authenticity == "Verified" && !res.Disposable {
+	if authenticity == "Verified" && !res.Disposable && !res.SMTPBlocked {
 		recommendation = "Accept"
-	} else if authenticity == "Suspicious" || res.CatchAll || res.Role {
+	} else if authenticity == "Suspicious" || res.CatchAll || res.Role || res.SMTPBlocked {
 		recommendation = "Flag"
 	}
 

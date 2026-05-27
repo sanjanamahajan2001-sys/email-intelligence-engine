@@ -163,8 +163,8 @@ func DetectCatchAll(fromEmail, domain string, mxHosts []string, isBlocked bool, 
 		isTier1 = true
 	}
 
-	// 2. Production Logic: Handle "Soft-Accept" filtering gateways.
-	if isBlocked && isTier1 {
+	// 2. Production Logic: Handle "Soft-Accept" filtering gateways and Network Blocks.
+	if isBlocked {
 		return false
 	}
 

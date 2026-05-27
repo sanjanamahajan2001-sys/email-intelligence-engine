@@ -246,7 +246,9 @@ function App() {
                 </div>
                 <div className="detail-item">
                   <span className="detail-label">Lifecycle State</span>
-                  <div className="detail-value">{result.lifecycle_state}</div>
+                  <div className={`detail-value ${result.lifecycle_state === 'ACTIVE' ? 'success' : (result.lifecycle_state === 'INVALID' || result.lifecycle_state === 'ABANDONED' ? 'danger' : '')}`}>
+                    {result.lifecycle_state}
+                  </div>
                 </div>
                 <div className="detail-item">
                   <span className="detail-label">Domain/Identity Age</span>

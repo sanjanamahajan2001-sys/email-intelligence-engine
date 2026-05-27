@@ -150,7 +150,7 @@ func ProcessEmail(database *db.DB, fromEmail, email, source, clientIP string, us
 	// 6. Overall Scoring & Lifecycle Mapping
 	core.CalculateScore(res, ageStatus)
 	res.EngagementProbability = intelligence.CalculateEngagementProbability(res, database)
-	res.IsValid = res.Syntax && res.DNS && res.SMTP && !res.Disposable
+	res.IsValid = res.Syntax && res.DNS && (res.SMTP || res.SMTPBlocked || res.Greylisted) && !res.Disposable
 
 	// Determine Transition State (Advanced State Machine)
 	res.LifecycleState = "INVALID"
