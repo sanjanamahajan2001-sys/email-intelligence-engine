@@ -17,14 +17,16 @@ func GetDomainTrust(domain string, ageYears float64) TrustScore {
 	var reasons []string
 
 	// 1. Age Factor (Critical for Disposable detection)
-	if ageYears < 0.1 { // Less than ~36 days
-		score -= 50
-		reasons = append(reasons, "Very New Domain")
-	} else if ageYears < 0.5 { // Less than 6 months
-		score -= 20
-		reasons = append(reasons, "Recently Registered")
-	} else if ageYears > 2.0 {
-		score += 10 // Trust boost for established domains
+	if ageYears >= 0 {
+		if ageYears < 0.1 { // Less than ~36 days
+			score -= 50
+			reasons = append(reasons, "Very New Domain")
+		} else if ageYears < 0.5 { // Less than 6 months
+			score -= 20
+			reasons = append(reasons, "Recently Registered")
+		} else if ageYears > 2.0 {
+			score += 10 // Trust boost for established domains
+		}
 	}
 
 	// 2. TLD Reputation Factor

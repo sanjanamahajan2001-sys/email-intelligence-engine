@@ -114,6 +114,25 @@ func (db *DB) createTables() error {
 			return err
 		}
 	}
+
+	// Safely migrate existing databases by ensuring newer columns are present
+	migrations := []string{
+		`ALTER TABLE scans ADD COLUMN engagement_probability INTEGER DEFAULT 0`,
+		`ALTER TABLE scans ADD COLUMN last_smtp_response TEXT DEFAULT ''`,
+		`ALTER TABLE scans ADD COLUMN engagement_insight TEXT DEFAULT ''`,
+		`ALTER TABLE scans ADD COLUMN lifecycle_state TEXT DEFAULT 'ACTIVE'`,
+		`ALTER TABLE scans ADD COLUMN engagement_factors TEXT DEFAULT '[]'`,
+		`ALTER TABLE scans ADD COLUMN message TEXT DEFAULT ''`,
+		`ALTER TABLE scans ADD COLUMN client_ip TEXT DEFAULT ''`,
+		`ALTER TABLE scans ADD COLUMN user_id INTEGER DEFAULT 0`,
+		`ALTER TABLE scans ADD COLUMN user_agent TEXT DEFAULT ''`,
+		`ALTER TABLE scans ADD COLUMN processing_time_ms INTEGER DEFAULT 0`,
+	}
+
+	for _, m := range migrations {
+		_, _ = db.conn.Exec(m) // Fail silently if column already exists
+	}
+
 	return nil
 }
 

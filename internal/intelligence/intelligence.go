@@ -79,7 +79,7 @@ func GetCombinedAge(email string, domainAge float64, telemetryAge float64) (floa
 	}
 
 	// 2. Telemetry Integration
-	if telemetryAge > finalAge {
+	if telemetryAge > 0 && telemetryAge > finalAge {
 		finalAge = telemetryAge
 		conf = 80 // Internal data is high confidence
 		status = "Telemetry Verified"

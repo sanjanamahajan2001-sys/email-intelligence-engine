@@ -351,12 +351,14 @@ func CalculateScore(res *EmailResult, ageStatus string) {
 			effectiveAge = float64(res.IdentityAgeYears)
 		}
 
-		if effectiveAge >= 0 && effectiveAge < 0.5 {
-			score -= 40
-		} else if effectiveAge >= 0 && effectiveAge < 1 {
-			score -= 20
-		} else if effectiveAge > 10 {
-			score += 15 // Bonus for established identities
+		if effectiveAge >= 0 {
+			if effectiveAge < 0.5 {
+				score -= 40
+			} else if effectiveAge < 1 {
+				score -= 20
+			} else if effectiveAge > 10 {
+				score += 15 // Bonus for established identities
+			}
 		}
 
 
