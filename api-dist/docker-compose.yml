@@ -1,0 +1,15 @@
+services:
+  email-validator-api:
+    build: .
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/root/
+    environment:
+      - API_PORT=8080
+      - DB_PATH=emails.db
+      - SMTP_SENDER=sanjanamaahi2001@gmail.com
+      - RATE_LIMIT_IP_MIN=10
+      - ACCESS_TOKEN_DURATION=15m
+      - REFRESH_TOKEN_DURATION=168h
+    restart: unless-stopped

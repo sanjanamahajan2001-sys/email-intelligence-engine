@@ -1,0 +1,9 @@
+nohup: ignoring input
+╭────────────────────────╮
+│ 🚀 Email-Validator CLI │
+╰────────────────────────╯
+                          
+Usage:
+  email-validator check <email>        Single email validation
+  email-validator interactive        Interactive UI mode
+  email-validator history            Show scan history
