@@ -460,7 +460,7 @@ function App() {
           Engineered by <strong>Sanjana Mahajan</strong> &copy; {new Date().getFullYear()}
         </span>
         <div className="footer-links">
-          <a href="https://github.com/sanjana" target="_blank" rel="noopener noreferrer" className="footer-link">GitHub</a>
+          <a href="https://github.com/sanjanamahajan2001-sys" target="_blank" rel="noopener noreferrer" className="footer-link">GitHub</a>
           <a href="#" className="footer-link">Portfolio Website</a>
           <a href="#" className="footer-link">Systems Status</a>
         </div>
