@@ -197,6 +197,7 @@ Used directly by the web frontend interface for instant checks.
       }
     }
     ```
+<img width="1396" height="978" alt="image" src="https://github.com/user-attachments/assets/f98305ec-1571-415f-b54c-df42f2eab407" />
 
 ### 2. User Authentication (JWT)
 *   **Endpoint**: `/v1/auth/login`
@@ -247,6 +248,8 @@ go build -o email-api ./cmd/api/main.go
 ```
 
 ---
+<img width="1123" height="586" alt="image" src="https://github.com/user-attachments/assets/49d61100-fd86-4e55-ae10-4d9ab81afa22" />
+<img width="1707" height="966" alt="image" src="https://github.com/user-attachments/assets/5397c3c7-5235-4769-87c6-7e0c659111f4" />
 
 ## ⚡ Deployment & Hosting
 
